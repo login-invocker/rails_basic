@@ -23,9 +23,15 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-
+    puts "check params: #{post_params}"
+    # check before save
+    puts "before save: #{@post.valid?}"
+    # if !@post.valid?
+    #   return puts "no validate"
+    # end
     respond_to do |format|
-      if @post.save
+      if @post.save()
+        # validate: false
         format.html { redirect_to @post, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
